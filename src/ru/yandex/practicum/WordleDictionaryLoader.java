@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.nio.charset.StandardCharsets;
-import java.util.zip.DataFormatException;
 
 /*
 этот класс содержит в себе всю рутину по работе с файлами словарей и с кодировками
