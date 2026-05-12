@@ -31,14 +31,14 @@ public class WordleDictionaryLoader {
                 if (line != null && !line.isBlank()) {
                     words.add(line);
                 }
-                if (words.isEmpty()) {
-                    log.println("Словарь пуст после загрузки.");
-                    throw new DictionaryLoadException("Словарь не содержит слов");
-                }
             }
         } catch (IOException e) {
             log.println("Ошибка чтения файла: " + e.getMessage());
             throw new DictionaryLoadException("Не удалось загрузить словарь", e);
+        }
+        if (words.isEmpty()) {
+            log.println("Словарь пуст после загрузки.");
+            throw new DictionaryLoadException("Словарь не содержит слов");
         }
         return words;
     }

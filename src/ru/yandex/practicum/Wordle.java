@@ -51,10 +51,6 @@ public class Wordle {
             } else {
                 System.out.println("Попыток больше нет. Вы проиграли. Загаданное слово было: " + game.getAnswer());
             }
-
-            scanner.close();
-        } catch (IOException | DictionaryLoadException e) {
-            System.err.println("Критическая ошибка: " + e.getMessage());
         }
     }
 }

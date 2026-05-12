@@ -42,7 +42,7 @@ class WordleTest {
 
 
     @Test
-    void testExactMatch() {
+    void testExactMatch() throws InvalidWordException{
         WordleGame game = createGameWithSecret("выбор");
         String feedback = game.makeMove("выбор");
         assertEquals("+++++", feedback);
@@ -50,7 +50,7 @@ class WordleTest {
     }
 
     @Test
-    void testNoMatch() {
+    void testNoMatch() throws  InvalidWordException{
         WordleDictionary dict = new WordleDictionary(List.of("выбор", "шланг"));
         WordleGame game = new WordleGame(dict, log);
 
@@ -62,7 +62,7 @@ class WordleTest {
     }
 
     @Test
-    void testWrongPosition() {
+    void testWrongPosition() throws InvalidWordException{
         WordleDictionary dict = new WordleDictionary(List.of("слово", "волос"));
         WordleGame g = new WordleGame(dict, log);
         String feedback = g.makeMove("волос");
@@ -72,7 +72,7 @@ class WordleTest {
     }
 
     @Test
-    void testMixedFeedback() {
+    void testMixedFeedback() throws InvalidWordException{
         WordleDictionary dict = new WordleDictionary(List.of("герой", "гонец"));
         WordleGame g = createStableGame(dict, "герой");
 
@@ -81,7 +81,7 @@ class WordleTest {
     }
 
     @Test
-    void testDuplicateLettersOneInTarget() {
+    void testDuplicateLettersOneInTarget() throws InvalidWordException{
         WordleDictionary dict = new WordleDictionary(List.of("баран", "аббат"));
         WordleGame g = createStableGame(dict, "баран");
 
@@ -92,7 +92,7 @@ class WordleTest {
     }
 
     @Test
-    void testGameNotOverMidGame() {
+    void testGameNotOverMidGame() throws InvalidWordException{
         WordleDictionary dict = new WordleDictionary(List.of("герой", "гонец"));
         WordleGame g = createStableGame(dict, "герой");
 
@@ -110,7 +110,7 @@ class WordleTest {
     }
 
     @Test
-    void testInputWithSpaces() {
+    void testInputWithSpaces() throws InvalidWordException {
         WordleGame game = createGameWithSecret("герой");
         // Пользователь случайно ввел пробел в конце
         String feedback = game.makeMove("герой ");
@@ -118,7 +118,7 @@ class WordleTest {
     }
 
     @Test
-    void testAllLettersWrongPlace() {
+    void testAllLettersWrongPlace() throws InvalidWordException{
         WordleDictionary dict = new WordleDictionary(List.of("слово", "волос"));
         WordleGame g = createStableGame(dict, "слово");
 
@@ -128,7 +128,7 @@ class WordleTest {
     }
 
     @Test
-    void testLoggingWorks() {
+    void testLoggingWorks() throws InvalidWordException {
         WordleDictionary dict = new WordleDictionary(List.of("герой", "гонец"));
         WordleGame g = createStableGame(dict, "герой");
         g.makeMove("гонец");
@@ -141,14 +141,14 @@ class WordleTest {
     }
 
     @Test
-    void testYoLetterReplacement() {
+    void testYoLetterReplacement() throws InvalidWordException{
         WordleGame game = createGameWithSecret("медок");
         String feedback = game.makeMove("мёдок");
         assertEquals("+++++", feedback);
     }
 
     @Test
-    void testGameOverAfter6Attempts() {
+    void testGameOverAfter6Attempts() throws InvalidWordException{
         List<String> words = List.of("герой", "гонец", "экран", "балет", "выбор", "кросс", "степь");
         WordleDictionary dict = new WordleDictionary(words);
         WordleGame g = createStableGame(dict, "степь");
